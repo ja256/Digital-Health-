@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Appointment</h1>
+  
+  <div class="section">
+    <h2>Appointment Type</h2>
+    <label>
+      <input type="radio" name="appointmentType" value="online"> Online
+    </label>
+    <label>
+      <input type="radio" name="appointmentType" value="offline"> Offline
+    </label>
+  </div>
+
+  <div class="section">
+    <h2>Select Specialty</h2>
+    <label for="specialty">Specialty</label>
+    <select id="specialty">
+      <option value="neuro">Neuro</option>
+      <option value="dental">Dental</option>
+      <option value="optical">Optical</option>
+      <option value="heart">Heart</option>
+    </select>
+  </div>
+
+  <div class="section">
+    <h2>List of Doctors</h2>
+    <div>
+      <button class="button">View</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Doctor Information</h2>
+    <label for="doctorName">Name</label>
+    <input type="text" id="doctorName" placeholder="Doctor's Name">
+    
+    <label for="location">Location</label>
+    <input type="text" id="location" placeholder="Location">
+    
+    <label for="contact">Contact</label>
+    <input type="text" id="contact" placeholder="Contact">
+    
+    <label for="availability">Available Date</label>
+    <input type="date" id="availability">
+
+    <button class="button">Make Appointment</button>
+  </div>
+
+  <div class="section">
+    <h2>Appointment Details</h2>
+    <label for="description">Description</label>
+    <textarea id="description" rows="3" placeholder="Enter appointment details"></textarea>
+    
+    <label for="appointmentDate">Date</label>
+    <input type="date" id="appointmentDate">
+    
+    <label for="appointmentTime">Time</label>
+    <input type="time" id="appointmentTime">
+    
+    <button class="button">Submit</button>
+  </div>
+</div>
+
+</body>
+</html>
