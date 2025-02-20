@@ -1,0 +1,102 @@
+]<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- FullCalendar CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.11.0/main.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.0/main.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.0/main.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Welcome, Doctor</h1>
+            <nav>
+                <ul>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/appointments">Appointments</a></li>
+                    <li><a href="/patient-records">Patient Records</a></li>
+                    <li><a href="/medical-records">Medical Records</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="dashboard-main">
+            <h2>Dashboard Overview</h2>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Upcoming Appointments</h3>
+                    <ul>
+                       
+                    </ul>
+                    <a href="/appointments" class="btn">View All</a>
+                </div>
+                <div class="card">
+                    <h3>Patient Records</h3>
+                    <ul>
+                        <li>Patient 1 - Last Visit: 01/03/2025</li>
+                        <li>Patient 2 - Last Visit: 05/03/2025</li>
+                    </ul>
+                    <a href="/patient-records" class="btn">View Records</a>
+                </div>
+                <div class="card">
+                    <h3>Recent Medical Records</h3>
+                    <p>Last Record: 01/03/2025</p>
+                    <a href="/medical-records" class="btn">View All Records</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FullCalendar Section -->
+        <section class="dashboard-calendar">
+            <h3>Upcoming Appointments</h3>
+            <div id="calendar"></div>
+        </section>
+    </div>
+
+    <!-- FullCalendar Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.11.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.0/main.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid', 'interaction'],
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+                events: [
+                    {
+                        title: 'Appointment 1 - Patient: John Doe',
+                        start: '2025-03-10T10:00:00',
+                        end: '2025-03-10T11:00:00'
+                    },
+                    {
+                        title: 'Appointment 2 - Patient: Jane Smith',
+                        start: '2025-03-17T14:00:00',
+                        end: '2025-03-17T15:00:00'
+                    }
+                ],
+                dateClick: function(info) {
+                    alert('Date clicked: ' + info.dateStr);
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+
+</html>
