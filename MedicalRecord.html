@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Record Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="medical-record-container">
+        <header>
+            <h1>Medical Record Management</h1>
+            <nav>
+                <ul>
+                    <li><a href="/doctor/dashboard">Doctor Dashboard</a></li>
+                    <li><a href="/doctor/profile">Profile</a></li>
+                    <li><a href="/doctor/appointments">Appointments</a></li>
+                    <li><a href="/doctor/medical-records">Medical Records</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="view-medical-records">
+            <h2>Patient Medical Records</h2>
+            <div class="medical-records-list">
+                <!-- Example of a patient's medical record -->
+                <div class="medical-record-card">
+                    <h3>Patient: John Doe</h3>
+                    <p><strong>Visit Date:</strong> 10/03/2025</p>
+                    <p><strong>Diagnosis:</strong> Hypertension</p>
+                    <p><strong>Treatment:</strong> Lifestyle changes and medication</p>
+                    <p><strong>Prescription:</strong> Amlodipine 10mg</p>
+                    <p><strong>Follow-up Date:</strong> 17/03/2025</p>
+                    <a href="/doctor/medical-records/edit/1" class="btn">Edit Record</a>
+                </div>
+
+                <div class="medical-record-card">
+                    <h3>Patient: Jane Smith</h3>
+                    <p><strong>Visit Date:</strong> 12/03/2025</p>
+                    <p><strong>Diagnosis:</strong> Diabetes Type 2</p>
+                    <p><strong>Treatment:</strong> Insulin therapy</p>
+                    <p><strong>Prescription:</strong> Insulin 20 units</p>
+                    <p><strong>Follow-up Date:</strong> 19/03/2025</p>
+                    <a href="/doctor/medical-records/edit/2" class="btn">Edit Record</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="add-medical-record">
+            <h2>Add New Medical Record</h2>
+            <form action="/doctor/medical-records/create" method="POST">
+                <div class="form-group">
+                    <label for="patient-name">Patient Name:</label>
+                    <input type="text" id="patient-name" name="patient_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit-date">Visit Date:</label>
+                    <input type="date" id="visit-date" name="visit_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="diagnosis">Diagnosis:</label>
+                    <textarea id="diagnosis" name="diagnosis" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="treatment">Treatment:</label>
+                    <textarea id="treatment" name="treatment" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="prescription">Prescription:</label>
+                    <textarea id="prescription" name="prescription"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="follow-up-date">Follow-up Date:</label>
+                    <input type="date" id="follow-up-date" name="follow_up_date">
+                </div>
+
+                <button type="submit" class="btn">Save Medical Record</button>
+            </form>
+        </section>
+
+    </div>
+</body>
+
+</html>
