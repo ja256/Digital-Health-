@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="health-tracking-container">
+        <h2>Health Tracking Dashboard</h2>
+
+        <div class="tracking-form">
+            <h3>Enter Your Health Metrics</h3>
+            <form id="healthForm">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" required>
+
+                <label for="bloodPressure">Blood Pressure (mmHg):</label>
+                <input type="text" id="bloodPressure" name="bloodPressure" placeholder="e.g., 120/80">
+
+                <label for="heartRate">Heart Rate (bpm):</label>
+                <input type="number" id="heartRate" name="heartRate">
+
+                <button type="submit">Save Metrics</button>
+            </form>
+        </div>
+
+        <div class="tracking-history">
+            <h3>Health History</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight (kg)</th>
+                        <th>Height (cm)</th>
+                        <th>Blood Pressure</th>
+                        <th>Heart Rate (bpm)</th>
+                    </tr>
+                </thead>
+                <tbody id="healthHistory">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('healthForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            let weight = document.getElementById('weight').value;
+            let height = document.getElementById('height').value;
+            let bloodPressure = document.getElementById('bloodPressure').value;
+            let heartRate = document.getElementById('heartRate').value;
+
+            // Get current date
+            let currentDate = new Date().toLocaleDateString();
+
+            // Insert data into the table
+            let table = document.getElementById('healthHistory');
+            let newRow = table.insertRow();
+            newRow.innerHTML = `<td>${currentDate}</td><td>${weight}</td><td>${height}</td><td>${bloodPressure}</td><td>${heartRate}</td>`;
+
+            // Clear form
+            document.getElementById('healthForm').reset();
+        });
+    </script>
+
+</body>
+
+</html>
