@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title> 
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="user-management-container">
+        <h2>User Management</h2>
+
+        <nav class="admin-menu">
+            <ul>
+                <li><a href="Admin.html">Dashboard</a></li>
+                <li><a href="Appointments.html">Manage Appointments</a></li>
+                <li><a href="HealthRecords.html">Health Records</a></li>
+                <li><a href="Report.html">Reports</a></li>
+                <li><a href="Settings.html">Settings</a></li>
+                <li><a href="LogOut.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <section class="user-list">
+            <h3>Registered Users</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- User data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="add-user">
+            <h3>Add New User</h3>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter full name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter email">
+
+            <label for="role">Role:</label>
+            <select id="role">
+                <option value="admin">Admin</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+            </select>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password">
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm password">
+
+            <button onclick="addUser()">Add User</button>
+        </section>
+    </div>
+
+    <script>
+        const users = [
+            { id: 1, name: "Dr. Jane Doe", email: "jane.doe@example.com", role: "Doctor", password: "password123" },
+            { id: 2, name: "John Smith", email: "john.smith@example.com", role: "Patient", password: "password123" },
+            { id: 3, name: "Admin User", email: "admin@example.com", role: "Admin", password: "adminpass" }
+        ];
+
+        function renderUsers() {
+            const tbody = document.getElementById("userTableBody");
+            tbody.innerHTML = "";
+            users.forEach(user => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                        <td>
+                            <button onclick="editUser(${user.id})">Edit</button>
+                            <button onclick="deleteUser(${user.id})" class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addUser() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const role = document.getElementById("role").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Validate inputs
+            if (!name || !email || !password || !confirmPassword) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email.");
+                return;
+            }
+
+            // Create new user with a password
+            const newUser = {
+                id: Date.now(), // Ensure unique ID
+                name,
+                email,
+                role,
+                password // Store the password (hashed in a real app)
+            };
+
+            users.push(newUser);
+            renderUsers();
+            alert("User added successfully!");
+
+            // Clear input fields
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("confirmPassword").value = "";
+        }
+
+        function editUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                const newName = prompt("Enter new name:", user.name);
+                const newEmail = prompt("Enter new email:", user.email);
+                if (newName && newEmail) {
+                    user.name = newName;
+                    user.email = newEmail;
+                    renderUsers();
+                    alert("User updated successfully!");
+                }
+            }
+        }
+
+        function deleteUser(userId) {
+            const confirmed = confirm("Are you sure you want to delete this user?");
+            if (confirmed) {
+                const index = users.findIndex(user => user.id === userId);
+                users.splice(index, 1);
+                renderUsers();
+                alert("User deleted successfully!");
+            }
+        }
+
+        window.onload = renderUsers;
+    </script>
+
+</body>
+
+</html>
