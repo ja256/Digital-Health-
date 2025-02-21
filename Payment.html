@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .payment-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .card-icons {
+            font-size: 24px;
+            color: #007bff;
+            margin-left: 10px;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h2>Secure Payment</h2>
+    <form id="payment-form" method="POST" action="{% url 'process_payment' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+            <label for="card_number">Card Number <i class="fa-brands fa-cc-visa card-icons"></i> <i class="fa-brands fa-cc-mastercard card-icons"></i></label>
+            <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+        </div>
+
+        <div class="form-group">
+            <label for="expiry_date">Expiry Date</label>
+            <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" name="cvv" placeholder="123" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Pay Now</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+        let cardNumber = document.getElementById('card_number').value;
+        let expiryDate = document.getElementById('expiry_date').value;
+        let cvv = document.getElementById('cvv').value;
+
+        let cardNumberRegex = /^\d{16}$/;
+        let expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+        let cvvRegex = /^\d{3,4}$/;
+
+        if (!cardNumberRegex.test(cardNumber)) {
+            alert('Invalid Card Number! It should be 16 digits.');
+            event.preventDefault();
+        }
+        if (!expiryRegex.test(expiryDate)) {
+            alert('Invalid Expiry Date! Use MM/YY format.');
+            event.preventDefault();
+        }
+        if (!cvvRegex.test(cvv)) {
+            alert('Invalid CVV! It should be 3 or 4 digits.');
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
