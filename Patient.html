@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration | Maternal Health App</title>
+    <style>
+        /* General Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            text-align: left;
+            margin: 12px 0 5px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease-in-out;
+            background-color: #fafafa;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #ff7e5f;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+            background-color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #e76a4c;
+            transform: translateY(-2px);
+        }
+
+        .login-link {
+            margin-top: 15px;
+            display: block;
+            font-size: 14px;
+            color: #ff7e5f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Patient Registration</h2>
+    <form id="patientRegisterForm">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="City/Village, Country" required>
+
+        <label for="emergencyContact">Emergency Contact</label>
+        <input type="tel" id="emergencyContact" name="emergencyContact" placeholder="Emergency contact number" required>
+
+        <label for="bloodType">Blood Type</label>
+        <select id="bloodType" name="bloodType" required>
+            <option value="">-- Select Blood Type --</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="insurance">Insurance Details</label>
+        <input type="text" id="insurance" name="insurance" placeholder="Insurance Provider (if any)">
+
+        <label for="pregnancyStage">Current Pregnancy Stage</label>
+        <select id="pregnancyStage" name="pregnancyStage" required>
+            <option value="">-- Select Trimester --</option>
+            <option value="First Trimester">First Trimester (1-12 Weeks)</option>
+            <option value="Second Trimester">Second Trimester (13-26 Weeks)</option>
+            <option value="Third Trimester">Third Trimester (27-40 Weeks)</option>
+        </select>
+
+        <label for="edd">Estimated Due Date (EDD)</label>
+        <input type="date" id="edd" name="edd" required>
+
+        <label for="medicalHistory">Medical History</label>
+        <textarea id="medicalHistory" name="medicalHistory" rows="3" placeholder="E.g. Diabetes, Hypertension, Allergies"></textarea>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <a href="login.html" class="login-link">Already have an account? Login here</a>
+</div>
+
+<script>
+    document.getElementById("patientRegisterForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var fullName = document.getElementById("fullName").value;
+        var dob = document.getElementById("dob").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var location = document.getElementById("location").value;
+        var emergencyContact = document.getElementById("emergencyContact").value;
+        var bloodType = document.getElementById("bloodType").value;
+        var pregnancyStage = document.getElementById("pregnancyStage").value;
+        var edd = document.getElementById("edd").value;
+
+        if (!fullName || !dob || !phone || !email || !location || !emergencyContact || !bloodType || !pregnancyStage || !edd) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        alert("Patient Registered Successfully!");
+        window.location.href = "patient_dashboard.html"; // Redirect to patient dashboard
+    });
+</script>
+
+</body>
+</html>
