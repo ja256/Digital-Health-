@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Maternal Health App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form id="registerForm">
+        <label for="role">Select Role</label>
+        <select id="role" name="role" onchange="toggleFields()">
+            <option value="">-- Select Role --</option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+            <option value="admin">Administrator</option>
+        </select>
+
+        <!-- Common Fields -->
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <!-- Patient Fields -->
+        <div id="patientFields" class="hidden">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob">
+
+            <label for="bloodType">Blood Type</label>
+            <select id="bloodType" name="bloodType">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+
+            <label for="emergencyContact">Emergency Contact</label>
+            <input type="tel" id="emergencyContact" name="emergencyContact">
+        </div>
+
+        <!-- Doctor Fields -->
+        <div id="doctorFields" class="hidden">
+            <label for="specialization">Specialization</label>
+            <input type="text" id="specialization" name="specialization">
+
+            <label for="hospital">Hospital/Clinic</label>
+            <input type="text" id="hospital" name="hospital">
+
+            <label for="license">Medical License Number</label>
+            <input type="text" id="license" name="license">
+        </div>
+
+        <!-- Admin Fields -->
+        <div id="adminFields" class="hidden">
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization">
+
+            <label for="adminCode">Admin Access Code</label>
+            <input type="text" id="adminCode" name="adminCode">
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function toggleFields() {
+        var role = document.getElementById("role").value;
+        document.getElementById("patientFields").classList.add("hidden");
+        document.getElementById("doctorFields").classList.add("hidden");
+        document.getElementById("adminFields").classList.add("hidden");
+
+        if (role === "patient") {
+            document.getElementById("patientFields").classList.remove("hidden");
+        } else if (role === "doctor") {
+            document.getElementById("doctorFields").classList.remove("hidden");
+        } else if (role === "admin") {
+            document.getElementById("adminFields").classList.remove("hidden");
+        }
+    }
+</script>
+
+</body>
+</html>
