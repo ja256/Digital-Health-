@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Medical Record Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #444;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            color: #333;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #fdfdfd;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .edit-btn:hover,
+        .delete-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section p {
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
+        .upload-section {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .upload-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: #218838;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .success-msg {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .error-msg {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            .section-title {
+                font-size: 1.6em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="section-title">Doctor's Medical Record Form</div>
+
+        <!-- Patient's Personal Information -->
+        <div class="form-section" id="personal-info">
+            <h3>Personal Information</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" id="patient-name" placeholder="Enter patient's name"></td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td><input type="text" id="patient-gender" placeholder="Enter patient's gender"></td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td><input type="text" id="patient-dob" placeholder="Enter date of birth"></td>
+                </tr>
+                <tr>
+                    <th>Emergency Contact No.</th>
+                    <td><input type="text" id="patient-emergency-contact" placeholder="Enter emergency contact"></td>
+                </tr>
+                <tr>
+                    <th>Phone No.</th>
+                    <td><input type="text" id="patient-phone" placeholder="Enter phone number"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><input type="email" id="patient-email" placeholder="Enter email address"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Medical Conditions -->
+        <div class="form-section" id="conditions">
+            <h3>Medical Conditions</h3>
+            <textarea id="conditions" placeholder="Enter medical conditions, allergies, or other details here"></textarea>
+        </div>
+
+        <!-- Medication Record -->
+        <div class="form-section" id="medication-record">
+            <h3>Medication Record</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medication</th>
+                        <th>Dosage</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody id="medication-list">
+                    <tr>
+                        <td><input type="text" id="medication-name" placeholder="Enter medication name"></td>
+                        <td><input type="text" id="medication-dosage" placeholder="Enter dosage"></td>
+                        <td><input type="text" id="medication-start-date" placeholder="Start date"></td>
+                        <td><input type="text" id="medication-end-date" placeholder="End date"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="edit-btn" onclick="editMedicationRecord()">Edit</button>
+                <button class="delete-btn" onclick="deleteMedicationRecord()">Delete</button>
+            </div>
+        </div>
+
+        <!-- Doctor's Visit Records -->
+        <div class="form-section" id="doctor-visits">
+            <h3>Doctor's Visit Records</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Visit Date</th>
+                        <th>Diagnosis</th>
+                        <th>Prescription</th>
+                        <th>Doctor's Name</th>
+                        <th>Doctor's Contact</th>
+                    </tr>
+                </thead>
+                <tbody id="visit-list">
+                    <tr>
+                        <td><input type="text" id="visit-date" placeholder="Visit date"></td>
+                        <td><input type="text" id="diagnosis" placeholder="Enter diagnosis"></td>
+                        <td><input type="text" id="prescription" placeholder="Enter prescription"></td>
+                        <td><input type="text" id="doctor-name" placeholder="Doctor's name"></td>
+                        <td><input type="text" id="doctor-contact" placeholder="Doctor's contact"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="edit-btn" onclick="editVisitRecord()">Edit</button>
+                <button class="delete-btn" onclick="deleteVisitRecord()">Delete</button>
+            </div>
+        </div>
+
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <label for="upload-file">Upload a Report or Image</label>
+            <input type="file" id="upload-file" name="file">
+            <button class="upload-btn" onclick="uploadFile()">Upload</button>
+        </div>
+
+        <div id="success-msg" class="success-msg" style="display:none;">Data successfully saved!</div>
+        <div id="error-msg" class="error-msg" style="display:none;">Error occurred. Please try again.</div>
+    </div>
+
+    <script>
+        function editMedicationRecord() {
+            // Implement the logic to edit medication record
+            console.log("Editing medication record...");
+            document.getElementById('success-msg').style.display = "block";
+        }
+
+        function deleteMedicationRecord() {
+            // Implement the logic to delete medication record
+            console.log("Deleting medication record...");
+            document.getElementById('error-msg').style.display = "block";
+        }
+
+        function editVisitRecord() {
+            // Implement the logic to edit visit record
+            console.log("Editing visit record...");
+            document.getElementById('success-msg').style.display = "block";
+        }
+
+        function deleteVisitRecord() {
+            // Implement the logic to delete visit record
+            console.log("Deleting visit record...");
+            document.getElementById('error-msg').style.display = "block";
+        }
+
+        function uploadFile() {
+            // Implement the file upload logic
+            console.log("File uploaded...");
+            document.getElementById('success-msg').style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
