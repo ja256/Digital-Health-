@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternal Health Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .support-section {
+            margin-top: 20px;
+        }
+        .contact {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .contact a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .live-chat {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .chat-button {
+            background: #28a745;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .chat-button:hover {
+            background: #218838;
+        }
+        #maternal-support-type {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Maternal Health Support</h2>
+
+        <div class="support-section">
+            <label for="maternal-support-type">Select Support Type:</label>
+            <select id="maternal-support-type">
+                <option value="">-- Select an option --</option>
+                <option value="pregnancy">Pregnancy Concerns</option>
+                <option value="postpartum">Postpartum Care</option>
+                <option value="infant">Infant Care</option>
+                <option value="emergency">Maternal Emergency</option>
+            </select>
+
+            <div id="contact-info">
+            </div>
+        </div>
+
+        <div class="live-chat">
+            <button class="chat-button">Live Chat Support</button>
+        </div>
+    </div>
+
+    <script>
+        const maternalSupportTypeSelect = document.getElementById('maternal-support-type');
+        const contactInfoDiv = document.getElementById('contact-info');
+
+        maternalSupportTypeSelect.addEventListener('change', function() {
+            const selectedType = maternalSupportTypeSelect.value;
+            let contactContent = '';
+
+            if (selectedType === 'pregnancy') {
+                contactContent = `
+                    <div class="contact">
+                        <p>Pregnancy Hotline: <a href="tel:+256775689204">+256775689204</a></p>
+                    </div>
+                    <div class="contact">
+                        <p>Pregnancy Email: <a href="mailto:pregnancy@maternalhealth.com">pregnancy@maternalhealth.com</a></p>
+                    </div>
+                `;
+            } else if (selectedType === 'postpartum') {
+                contactContent = `
+                    <div class="contact">
+                        <p>Postpartum Support: <a href="tel:+1800POSTPARTUM">+1800POSTPARTUM</a></p>
+                    </div>
+                    <div class="contact">
+                        <p>Postpartum Email: <a href="mailto:postpartum@maternalhealth.com">postpartum@maternalhealth.com</a></p>
+                    </div>
+                `;
+            } else if (selectedType === 'infant') {
+                contactContent = `
+                    <div class="contact">
+                        <p>Infant Care Line: <a href="tel:+1800INFANTCARE">+1800INFANTCARE</a></p>
+                    </div>
+                    <div class="contact">
+                        <p>Infant Care Email: <a href="mailto:infantcare@maternalhealth.com">infantcare@maternalhealth.com</a></p>
+                    </div>
+                `;
+            } else if (selectedType === 'emergency') {
+                contactContent = `
+                    <div class="contact">
+                        <p>Maternal Emergency: <a href="tel:+256999999999">+256999999999</a></p>
+                    </div>
+                `;
+            }
+
+            contactInfoDiv.innerHTML = contactContent;
+        });
+    </script>
+</body>
+</html>
+
